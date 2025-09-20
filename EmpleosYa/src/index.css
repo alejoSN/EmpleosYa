@@ -40,9 +40,9 @@ input{
 
 button{
   height: 50px;
-  width: 100px;
   border: 2px solid transparent;
   border-radius: 25px;
+  font-size: 24px;
 }
 
 button:hover{
@@ -50,7 +50,7 @@ button:hover{
   border-color: black
 }
 
-#estudiantes{
+#estudiantes, #especialidades{
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -58,23 +58,23 @@ button:hover{
   justify-content: center;
 }
 
-.alumno{
+.tarjeta{
   background-color: rgb(140, 160, 255);
-  width: 200px;
+  width: 300px;
   padding: 10px;
   text-align: center;
   border: 5px solid transparent;
   border-radius: 20px;
 }
 
-.alumno:hover{
+.tarjeta:hover{
   border-color: black;
 }
 
-.alumno img{
+.tarjeta img{
   width: 90%;
 }
 
-.ficha{
+.ficha, #admin{
   padding: 20px;
 }

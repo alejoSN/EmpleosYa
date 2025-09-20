@@ -7,12 +7,12 @@ function Login(){
             <h1>Iniciar sesion</h1>
             <form>
                 <div>
-                    <label htmlFor="username">Usuario</label>
+                    <label htmlFor="usuario">Usuario</label>
                     <br />
                     <input type="text" id="usuario" name="username" />
                 </div>
                 <div>
-                    <label htmlFor="password">Contraseña</label>
+                    <label htmlFor="contraseña">Contraseña</label>
                     <br />
                     <input type="password" id="contraseña" name="password" />
                 </div>

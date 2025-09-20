@@ -1,4 +1,4 @@
-import Alumno from "./alumnos";
+import Tarjeta from "./tarjetas";
 import Header from "./header"
 
 function Estudiantes(){
@@ -7,17 +7,17 @@ function Estudiantes(){
         <>
         <Header/>
         <section id="estudiantes">
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
-            <Alumno nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
+            <Tarjeta nombre="Alejo" descripcion="mucho texto" foto="computacion.png"/>
         </section>
         </>
     )

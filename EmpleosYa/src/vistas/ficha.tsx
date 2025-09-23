@@ -1,12 +1,12 @@
-import Header from "./header"
-import type { Datos } from "./tipos"
+import Header from "../header"
+import type { Datos } from "../tipos"
 
 
 function Ficha({nombre, descripcion, empresa, CV, foto}:Datos){
 
     return(
         <>
-        <Header/>
+        <Header titulo={nombre}/>
         <section className="ficha">
             <img src={foto} alt="Foto alumno" />
             <h2>{nombre}</h2>

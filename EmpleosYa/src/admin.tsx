@@ -4,9 +4,8 @@ function Admin(){
 
     return(
         <>
-        <Header/>
+        <Header titulo="Crear Usuario"/>
         <section id="admin">
-            <h2>Crear Usuario</h2>
             <form>
                 <label>Rol:</label>
                 <div>

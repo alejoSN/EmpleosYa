@@ -1,11 +1,18 @@
+import {useNavigate } from "react-router-dom"
+
 function Login(){
+    const navigate=useNavigate()
+
+    function handlerFormulario(){
+        navigate("/especialidades")
+    }
 
     return(
         <>
         <section id="login">
             <img src="escudo.png" alt="logo Krause" />
             <h1>Iniciar sesion</h1>
-            <form>
+            <form onSubmit={handlerFormulario}>
                 <div>
                     <label htmlFor="usuario">Usuario</label>
                     <br />

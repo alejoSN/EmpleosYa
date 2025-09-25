@@ -1,10 +1,17 @@
 import {useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 function Login(){
     const navigate=useNavigate()
+    const [usuario, setUsuario]=useState("")
 
-    function handlerFormulario(){
-        navigate("/especialidades")
+    function handlerFormulario(e:React.FormEvent<HTMLFormElement>){
+        e.preventDefault()
+        if(usuario=="Alejo"){
+            navigate("/especialidades")
+        }else{
+            navigate("/admin")
+        }
     }
 
     return(
@@ -16,7 +23,7 @@ function Login(){
                 <div>
                     <label htmlFor="usuario">Usuario</label>
                     <br />
-                    <input type="text" id="usuario" name="username" />
+                    <input type="text" id="usuario" name="username" onChange={e=>setUsuario(e.target.value)}/>
                 </div>
                 <div>
                     <label htmlFor="contraseña">Contraseña</label>

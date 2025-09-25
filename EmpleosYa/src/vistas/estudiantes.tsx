@@ -8,17 +8,17 @@ function Estudiantes(){
         <>
         <Header titulo="Alumnos"/>
         <section id="estudiantes">
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
         </section>
         </>
     )

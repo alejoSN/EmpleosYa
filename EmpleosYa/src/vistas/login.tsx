@@ -10,7 +10,7 @@ function Login(){
         if(usuario=="Alejo"){
             navigate("/especialidades")
         }else{
-            navigate("/admin")
+            navigate("/crear")
         }
     }
 

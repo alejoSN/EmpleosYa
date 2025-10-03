@@ -7,7 +7,7 @@ function Especialidades(){
     return(
         <>
         <Header titulo="Especialidades"/>
-        <section id="especialidades">
+        <section className="listado">
             <Link to={"/especialidades/estudiantes"}><Tarjeta nombre="Computacion" descripcion="mucho texto" foto="/computacion.png"/></Link>
             <Link to={"/especialidades/estudiantes"}><Tarjeta nombre="Construcciones" descripcion="mucho texto" foto="/construcciones.png"/></Link>
             <Link to={"/especialidades/estudiantes"}><Tarjeta nombre="Electrica" descripcion="mucho texto" foto="/electrica.png"/></Link>

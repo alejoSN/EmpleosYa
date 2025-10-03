@@ -1,10 +1,15 @@
 import Header from "./header"
+import { Link } from "react-router-dom";
 
-function Admin(){
+function Crear(){
 
     return(
         <>
         <Header titulo="Crear Usuario"/>
+        <nav>
+            <Link to={"/especialidades/estudiantes"}><h2>Ver Alumnos</h2></Link>
+            <Link to={"/empresas"}><h2>Ver Empresas</h2></Link>
+        </nav>
         <section id="admin">
             <form>
                 <label>Rol:</label>
@@ -53,4 +58,4 @@ function Admin(){
     )
 }
 
-export default Admin
+export default Crear

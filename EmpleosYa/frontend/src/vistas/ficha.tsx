@@ -1,4 +1,4 @@
-import Header from "../header"
+import Header from "../componentes/header"
 import type { Datos } from "../tipos"
 
 

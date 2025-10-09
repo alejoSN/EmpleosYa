@@ -5,7 +5,7 @@ import Empresas from './vistas/empresas'
 import Login from './vistas/login'
 import Ficha from './vistas/ficha'
 import {Routes, Route} from 'react-router-dom'
-import Crear from './crear'
+import Crear from './vistas/crear'
 
 function App() {
 

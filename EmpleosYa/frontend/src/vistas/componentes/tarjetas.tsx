@@ -1,5 +1,4 @@
-import type { Datos } from "./tipos"
-
+import type { Datos } from "../../tipos"
 function Tarjeta({nombre, descripcion, foto}: Datos){
 
     return(

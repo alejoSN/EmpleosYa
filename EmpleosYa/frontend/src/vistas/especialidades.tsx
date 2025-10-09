@@ -1,5 +1,5 @@
-import Header from "../header"
-import Tarjeta from "../tarjetas"
+import Header from "../componentes/header"
+import Tarjeta from "../componentes/tarjetas"
 import { Link } from "react-router-dom"
 
 function Especialidades(){

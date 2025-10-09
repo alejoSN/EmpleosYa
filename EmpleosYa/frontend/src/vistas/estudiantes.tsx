@@ -1,5 +1,5 @@
-import Tarjeta from "../tarjetas";
-import Header from "../header"
+import Tarjeta from "../componentes/tarjetas";
+import Header from "../componentes/header"
 import { Link } from "react-router-dom";
 
 function Estudiantes(){

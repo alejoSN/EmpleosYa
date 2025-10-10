@@ -26,9 +26,10 @@ function Estudiantes() {
         <Header titulo="Alumnos" />
         <section className="listado">
             {alumnos.map((alumno) => (
-            <Link key={alumno.ID} to={`/especialidades/estudiantes/${alumno.ID}`}>
-                <Tarjeta nombre={`${alumno.nombre} ${alumno.apellido}`} descripcion={alumno.descripcion} foto={`/imagenes/${alumno.foto}`}/>
+            <Link key={alumno.ID} to={`/estudiantes/${alumno.ID}`}>
+                <Tarjeta nombre={`${alumno.nombre} ${alumno.apellido}`} descripcion={alumno.descripcion} foto={alumno.foto}/>
             </Link>
+
             ))}
         </section>
         </>
@@ -36,3 +37,5 @@ function Estudiantes() {
 }
 
 export default Estudiantes;
+
+

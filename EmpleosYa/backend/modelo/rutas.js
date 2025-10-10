@@ -5,4 +5,9 @@ async function alumnos() {
   return rows;
 }
 
-module.exports = { alumnos};
+async function alumnoID(id) {
+  const [rows] = await pool.query('SELECT * FROM alumnos WHERE id = ?', [id]);
+  return rows
+}
+
+module.exports = { alumnos, alumnoID};

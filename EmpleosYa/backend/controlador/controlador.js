@@ -10,4 +10,13 @@ async function listarAlumnos(req, res) {
   }
 }
 
-module.exports = { listarAlumnos};
+async function detalleAlumno(req, res) {
+  try {
+    const alumno= await modelo.alumnoID();
+    res.json(alumno);
+  }catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener alumno" });
+  }
+}
+module.exports = {listarAlumnos, detalleAlumno};

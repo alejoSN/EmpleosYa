@@ -15,8 +15,8 @@ function App() {
       <Route path='/' element={<Login/>}/>
       <Route path='/especialidades' element={<Especialidades/>}/>
       <Route path='/estudiantes' element={<Estudiantes/>}/>
-      <Route path="/:idespecialidad/estudiantes" element={<Estudiantes />} />
-      <Route path='/especialidades/estudiantes/estudiante' element={<Ficha nombre="Alejo" descripcion="mucho texto" empresa="Ninguna" CV="computacion.png" foto="/computacion.png"/>}/>
+      <Route path="/:IDespecialidad/estudiantes" element={<Estudiantes />} />
+      <Route path="/estudiantes/:id" element={<Ficha />} />
       <Route path='crear' element={<Crear/>}/>
       <Route path='/empresas' element={<Empresas/>}/>
     </Routes>

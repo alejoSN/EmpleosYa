@@ -9,7 +9,7 @@ function Crear(){
         <>
         <Header titulo="Crear Usuario"/>
         <nav>
-            <Link to={"/especialidades/estudiantes"}><h2>Ver Alumnos</h2></Link>
+            <Link to={"/estudiantes"}><h2>Ver Alumnos</h2></Link>
             <Link to={"/empresas"}><h2>Ver Empresas</h2></Link>
         </nav>
         <section id="admin">

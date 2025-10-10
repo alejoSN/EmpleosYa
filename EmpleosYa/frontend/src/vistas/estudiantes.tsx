@@ -1,27 +1,38 @@
-import Tarjeta from "../componentes/tarjetas";
-import Header from "../componentes/header"
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Tarjeta from "../componentes/tarjetas";
+import Header from "../componentes/header";
 
-function Estudiantes(){
+type Alumno = {
+    ID: number;
+    nombre: string;
+    apellido: string;
+    descripcion: string;
+    foto: string;
+};
 
-    return(
+function Estudiantes() {
+    const [alumnos, setAlumnos] = useState<Alumno[]>([]);
+
+    useEffect(() => {
+        fetch("http://localhost:3000/alumnos")
+        .then((res) => res.json())
+        .then((data: Alumno[]) => setAlumnos(data))
+        .catch((err) => console.error("Error al cargar alumnos:", err));
+    }, []);
+
+    return (
         <>
-        <Header titulo="Alumnos"/>
+        <Header titulo="Alumnos" />
         <section className="listado">
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
-            <Link to={"/especialidades/estudiantes/estudiante"}><Tarjeta nombre="Alejo" descripcion="mucho texto" foto="/computacion.png"/></Link>
+            {alumnos.map((alumno) => (
+            <Link key={alumno.ID} to={`/especialidades/estudiantes/${alumno.ID}`}>
+                <Tarjeta nombre={`${alumno.nombre} ${alumno.apellido}`} descripcion={alumno.descripcion} foto={`/imagenes/${alumno.foto}`}/>
+            </Link>
+            ))}
         </section>
         </>
-    )
+    );
 }
 
-export default Estudiantes
+export default Estudiantes;

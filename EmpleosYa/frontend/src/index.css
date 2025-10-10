@@ -104,10 +104,6 @@ a, link{
   text-decoration: none;
 }
 
-a:hover, link:hover{
-  text-decoration: underline;
-}
-
 .empresa, nav{
   display: flex;
   justify-content: space-between;

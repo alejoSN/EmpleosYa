@@ -5,7 +5,7 @@ async function mostrarLista(req, res) {
 }
 
 async function mostrarDetalle(req, res) {
-  await controlador.verAlumno(req, res);
+  await controlador.detalleAlumno(req, res);
 }
 
 module.exports = { mostrarLista, mostrarDetalle };

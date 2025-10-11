@@ -16,26 +16,31 @@ function Estudiantes() {
 
     useEffect(() => {
         fetch("http://localhost:3000/alumnos")
-        .then((res) => res.json())
-        .then((data: Alumno[]) => setAlumnos(data))
-        .catch((err) => console.error("Error al cargar alumnos:", err));
+            .then((res) => res.json())
+            .then((data: Alumno[]) => setAlumnos(data))
+            .catch((err) => console.error("Error al cargar alumnos:", err));
     }, []);
+    console.log("Datos de alumnos:", alumnos);
 
     return (
         <>
-        <Header titulo="Alumnos" />
-        <section className="listado">
-            {alumnos.map((alumno) => (
-            <Link key={alumno.ID} to={`/estudiantes/${alumno.ID}`}>
-                <Tarjeta nombre={`${alumno.nombre} ${alumno.apellido}`} descripcion={alumno.descripcion} foto={alumno.foto}/>
-            </Link>
-
-            ))}
-        </section>
+            <Header titulo="Alumnos" />
+            <section className="listado">
+                {alumnos.map((alumno) => (
+                    <Link
+                        key={alumno.ID}
+                        to={`/estudiantes/${alumno.ID}`}
+                    >
+                        <Tarjeta
+                            nombre={`${alumno.nombre} ${alumno.apellido}`}
+                            descripcion={alumno.descripcion}
+                            foto={`http://localhost:3000/archivos${alumno.foto}`}
+                        />
+                    </Link>
+                ))}
+            </section>
         </>
     );
 }
 
 export default Estudiantes;
-
-

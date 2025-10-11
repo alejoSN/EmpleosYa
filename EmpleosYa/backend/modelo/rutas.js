@@ -1,13 +1,13 @@
 const pool = require('./conexion');
 
 async function alumnos() {
-  const [rows] = await pool.query('SELECT nombre, apellido, foto, descripcion FROM alumnos');
+  const [rows] = await pool.query('SELECT ID, nombre, apellido, foto, descripcion FROM alumnos');
   return rows;
 }
 
 async function alumnoID(id) {
-  const [rows] = await pool.query('SELECT * FROM alumnos WHERE id = ?', [id]);
-  return rows
+  const [rows] = await pool.query('SELECT * FROM alumnos WHERE ID = ?', [id]);
+  return rows[0];
 }
 
-module.exports = { alumnos, alumnoID};
+module.exports = { alumnos, alumnoID };

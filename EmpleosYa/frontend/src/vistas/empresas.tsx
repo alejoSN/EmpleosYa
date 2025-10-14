@@ -1,64 +1,38 @@
-import Header from "../componentes/header"
+import Header from "../componentes/header";
+import { useEffect, useState } from "react";
 
-function Empresas(){
+type Empresa = {
+    razon_social: string;
+    cuit: number;
+};
 
-    return(
+function Empresas() {
+    const [empresas, setEmpresas] = useState<Empresa[]>([]);
+
+    useEffect(() => {
+        fetch("http://localhost:3000/empresas")
+            .then((res) => res.json())
+            .then((data) => setEmpresas(data))
+            .catch((err) => console.error("Error al cargar empresas:", err));
+    }, []);
+
+    return (
         <>
-        <Header titulo="Empresas"/>
-        <section>
-            <div className="empresa">
-                <h2>Razon social / nombre</h2>
-                <h2>CUIT</h2>
-                <h2>Acciones</h2>
-            </div>
-
-            <div className="empresa">
-                <h3>Streambe</h3>
-                <h3>1234</h3>
-                <div>
-                    <button id="borrar">Borrar</button>
-                    <button>Modificar</button>
-                </div>
-            </div>
-
-            <div className="empresa">
-                <h3>Globant</h3>
-                <h3>5678</h3>
-                <div>
-                    <button id="borrar">Borrar</button>
-                    <button>Modificar</button>
-                </div>
-            </div>
-
-            <div className="empresa">
-                <h3>Acenture</h3>
-                <h3>9012</h3>
-                <div>
-                    <button id="borrar">Borrar</button>
-                    <button>Modificar</button>
-                </div>
-            </div>
-
-            <div className="empresa">
-                <h3>Mercado Libre</h3>
-                <h3>3456</h3>
-                <div>
-                    <button id="borrar">Borrar</button>
-                    <button>Modificar</button>
-                </div>
-            </div>
-            
-            <div className="empresa">
-                <h3>Uala</h3>
-                <h3>7890</h3>
-                <div>
-                    <button id="borrar">Borrar</button>
-                    <button>Modificar</button>
-                </div>
-            </div>
-        </section>
+            <Header titulo="Empresas" />
+            <section>
+                {empresas.map((empresa) => (
+                    <div className="empresa" key={empresa.cuit}>
+                        <h3>{empresa.razon_social}</h3>
+                        <h3>{empresa.cuit}</h3>
+                        <div>
+                            <button id="borrar">Borrar</button>
+                            <button>Modificar</button>
+                        </div>
+                    </div>
+                ))}
+            </section>
         </>
-    )
+    );
 }
 
-export default Empresas
+export default Empresas;

@@ -10,4 +10,15 @@ async function alumnoID(id) {
   return rows[0];
 }
 
-module.exports = { alumnos, alumnoID };
+async function empresas() {
+  const [rows] = await pool.query('SELECT * FROM empresas ORDER BY LOWER(razon_social) ASC');
+  return rows;
+}
+
+async function alumnosEspecialidad(especialidad) {
+  const [rows] = await pool.query('SELECT ID, nombre, apellido, foto, descripcion FROM alumnos WHERE especialidad = ?',[especialidad]);
+  return rows;
+}
+
+
+module.exports = { alumnos, alumnoID, empresas, alumnosEspecialidad };

@@ -39,9 +39,7 @@ function Ficha() {
       <h2>{`${alumno.nombre} ${alumno.apellido}`}</h2>
       <p>{alumno.descripcion}</p>
       <p><strong>Empresa:</strong> {alumno.empresa ?? "Ninguna"}</p>
-      <a href={`http://localhost:3000/archivos${alumno.cv}`} target="_blank">
-        Ver CV
-      </a>
+      <a href={`http://localhost:3000/archivos${alumno.cv}`} target="_blank">Ver CV</a>
     </div>
     </>
   );

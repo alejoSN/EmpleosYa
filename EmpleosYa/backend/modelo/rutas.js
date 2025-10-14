@@ -20,5 +20,15 @@ async function alumnosEspecialidad(especialidad) {
   return rows;
 }
 
+async function insertarAlumno({ nombre, apellido, descripcion, foto, cv, contrasena, especialidad, ocupado, empresa}) {
+  const [result] = await pool.query('INSERT INTO alumnos (nombre, apellido, descripcion, foto, cv, contrasena, especialidad, ocupado, Empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [nombre, apellido, descripcion, foto, cv, contrasena, especialidad, ocupado, empresa || null]);
+  return result.insertId; 
+}
 
-module.exports = { alumnos, alumnoID, empresas, alumnosEspecialidad };
+
+async function insertarEmpresa({ cuit, razon_social, contrasena }) {
+  const [result] = await pool.query(`INSERT INTO empresas (cuit, razon_social, contrasena) VALUES (?, ?, ?)`, [cuit, razon_social, contrasena]);
+  return result.insertId;
+}
+
+module.exports = { alumnos, alumnoID, empresas, alumnosEspecialidad, insertarAlumno, insertarEmpresa };

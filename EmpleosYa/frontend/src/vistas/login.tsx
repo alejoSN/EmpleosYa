@@ -26,9 +26,9 @@ function Login(){
                     <input type="text" id="usuario" name="username" onChange={e=>setUsuario(e.target.value)}/>
                 </div>
                 <div>
-                    <label htmlFor="contraseña">Contraseña</label>
+                    <label htmlFor="contrasena">Contraseña</label>
                     <br />
-                    <input type="password" id="contraseña" name="password" />
+                    <input type="password" id="contrasena" name="contrasena" />
                 </div>
                 <button type="submit">Entrar</button>
             </form>

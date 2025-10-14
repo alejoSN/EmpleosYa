@@ -4,6 +4,7 @@ const PORT = 3000;
 const controlador = require('./controlador/controlador');
 const cors = require('cors');
 const path = require('path');
+const upload = require('./middleware/upload'); 
 
 app.use(cors());
 
@@ -15,6 +16,10 @@ app.get('/alumnos', controlador.mostrarAlumnos);
 app.get('/alumnos/:id', controlador.detalleAlumno);
 app.get('/empresas', controlador.mostrarEmpresas);
 app.get('/especialidades/:id', controlador.mostrarAlumnosEspecialidad);
+
+app.post('/alumnos', upload.fields([{ name: 'foto', maxCount: 1 }, { name: 'cv', maxCount: 1 }]), controlador.crearAlumno);
+app.post('/empresas', upload.none(), controlador.crearEmpresa);
+
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

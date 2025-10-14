@@ -92,11 +92,22 @@ button:hover{
 }
 
 .tarjeta img{
-  width: 90%;
+  max-height: 200px;
+  border-radius: 50%;
 }
 
 .ficha, #admin{
   padding: 20px;
+}
+
+.ficha img{
+  max-height: 400px;
+}
+
+.ficha a{
+  text-decoration: underline;
+  font-weight: bold;
+  color: rgb(100, 0, 0);
 }
 
 a, link{

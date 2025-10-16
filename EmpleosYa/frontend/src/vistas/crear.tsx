@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "../componentes/header";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 type Empresa = {
   cuit: string;
@@ -10,25 +10,29 @@ type Empresa = {
 function Crear() {
   const [rol, setRol] = useState<"alumno" | "empresa">("alumno");
 
-  // Campos alumno
+  // campos alumno
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [fotoFile, setFotoFile] = useState<File | null>(null);
   const [cvFile, setCvFile] = useState<File | null>(null);
-  const [especialidad, setEspecialidad] = useState("1"); // default Computacion
+  const [especialidad, setEspecialidad] = useState("1");
   const [ocupado, setOcupado] = useState(false);
   const [empresaAsignada, setEmpresaAsignada] = useState("");
 
-  // Campos empresa
+  // campos empresa
   const [cuit, setCuit] = useState("");
   const [razon, setRazon] = useState("");
 
-  const [contrasena, setcontrasena] = useState("");
+  // campo compartido
+  const [contrasena, setContrasena] = useState("");
+
   const [empresas, setEmpresas] = useState<Empresa[]>([]);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
+  // carga empresas para seleccionar si el alumno está ocupado
   useEffect(() => {
     fetch("http://localhost:3000/empresas")
       .then((res) => res.json())
@@ -36,8 +40,24 @@ function Crear() {
       .catch((err) => console.error("Error al cargar empresas:", err));
   }, []);
 
+  // detectar modo edición (query params)
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const modo = params.get("modo");
+    const cuitParam = params.get("cuit");
+    const razonParam = params.get("razon");
+
+    if (modo === "editar" && cuitParam && razonParam) {
+      setRol("empresa");
+      setCuit(cuitParam);
+      setRazon(razonParam);
+    }
+  }, [location]);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const params = new URLSearchParams(location.search);
+    const modo = params.get("modo");
 
     try {
       if (rol === "alumno") {
@@ -48,35 +68,39 @@ function Crear() {
         form.append("especialidad", especialidad);
         form.append("ocupado", ocupado ? "1" : "0");
         if (ocupado && empresaAsignada) form.append("empresa_cuit", empresaAsignada);
-
         if (fotoFile) form.append("foto", fotoFile);
         if (cvFile) form.append("cv", cvFile);
-
         form.append("contrasena", contrasena);
+
         const res = await fetch("http://localhost:3000/alumnos", {
           method: "POST",
           body: form,
         });
         if (!res.ok) throw new Error("Error al crear alumno");
-
         navigate("/estudiantes");
       } else {
-        const form = new FormData();
-        form.append("cuit", cuit);
-        form.append("razon", razon);
-        form.append("contrasena", contrasena);
+        const datos = {
+          razon_social: razon,
+          contrasena
+        };
 
-        const res = await fetch("http://localhost:3000/empresas", {
-          method: "POST",
-          body: form,
+        const metodo = modo === "editar" ? "PUT" : "POST";
+        const url = modo === "editar"
+          ? `http://localhost:3000/empresas/${cuit}`
+          : "http://localhost:3000/empresas";
+
+        const res = await fetch(url, {
+          method: metodo,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(datos),
         });
-        if (!res.ok) throw new Error("Error al crear empresa");
 
+        if (!res.ok) throw new Error("Error al crear/modificar empresa");
         navigate("/empresas");
       }
     } catch (err) {
       console.error(err);
-      alert("Error al crear usuario");
+      alert("Error al crear o modificar usuario");
     }
   }
 
@@ -231,6 +255,8 @@ function Crear() {
                   name="cuit"
                   value={cuit}
                   onChange={(e) => setCuit(e.target.value)}
+                  // si venimos en modo editar, bloqueamos el CUIT
+                  disabled={new URLSearchParams(location.search).get("modo") === "editar"}
                 />
               </div>
               <div>
@@ -249,16 +275,20 @@ function Crear() {
           <div>
             <label htmlFor="contrasena">Contraseña: </label>
             <input
-              type="contrasena"
+              type="password"
               id="contrasena"
               name="contrasena"
               value={contrasena}
-              onChange={(e) => setcontrasena(e.target.value)}
+              onChange={(e) => setContrasena(e.target.value)}
               required
             />
           </div>
 
-          <button type="submit">Crear Usuario</button>
+          <button type="submit">
+            {new URLSearchParams(location.search).get("modo") === "editar"
+              ? "Guardar Cambios"
+              : "Crear Usuario"}
+          </button>
         </form>
       </section>
     </>

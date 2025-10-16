@@ -54,23 +54,18 @@ async function crearAlumno(req, res) {
     console.log("req.body:", req.body);
     console.log("req.files:", req.files);
 
-    // Desestructuramos del body usando nombres simples
     const { nombre, apellido, descripcion, contrasena, especialidad, ocupado, empresa_cuit } = req.body;
 
     if (!nombre || !contrasena || !especialidad) {
       return res.status(400).json({ error: "Faltan datos requeridos" });
     }
-
-    // Hash de la contrasena
     const hashed = await bcrypt.hash(contrasena, 10);
 
-    // Archivos
     const fotoFile = req.files?.foto?.[0];
     const cvFile = req.files?.cv?.[0];
     const fotoPath = fotoFile ? `/imagenes/${fotoFile.filename}` : null;
     const cvPath = cvFile ? `/CVs/${cvFile.filename}` : null;
 
-    // Insertar en DB
     const nuevoId = await modelo.insertarAlumno({
       nombre,
       apellido,
@@ -117,7 +112,48 @@ async function crearEmpresa(req, res) {
   }
 }
 
-module.exports = { crearAlumno, crearEmpresa };
+async function borrarEmpresa(req, res) {
+  try {
+    const { cuit } = req.params;
 
+    const filas = await modelo.borrarEmpresa(cuit);
+    if (filas > 0) {
+      res.json({ mensaje: 'Empresa eliminada correctamente' });
+    } else {
+      res.status(404).json({ error: 'Empresa no encontrada' });
+    }
+  } catch (error) {
+    console.error('Error al borrar empresa:', error);
 
-module.exports = { mostrarAlumnos, detalleAlumno, mostrarEmpresas, mostrarAlumnosEspecialidad, crearAlumno, crearEmpresa };
+    if (error.code === 'ER_ROW_IS_REFERENCED_2') {
+      res.status(400).json({
+        error: 'No se puede borrar la empresa porque tiene alumnos asignados'
+      });
+    } else {
+      res.status(500).json({ error: 'Error al borrar empresa' });
+    }
+  }
+}
+
+async function actualizarEmpresa(req, res) {
+  try {
+    const { cuit } = req.params;
+    const nuevosDatos = req.body;
+
+    if (nuevosDatos.contrasena) {
+      nuevosDatos.contrasena = await bcrypt.hash(nuevosDatos.contrasena, 10);
+    }
+
+    const filas = await modelo.actualizarEmpresa(cuit, nuevosDatos);
+    if (filas > 0) {
+      res.json({ mensaje: 'Empresa actualizada correctamente' });
+    } else {
+      res.status(404).json({ error: 'Empresa no encontrada o sin cambios' });
+    }
+  } catch (error) {
+    console.error('Error al actualizar empresa:', error);
+    res.status(500).json({ error: 'Error al actualizar empresa' });
+  }
+}
+
+module.exports = { mostrarAlumnos, detalleAlumno, mostrarEmpresas, mostrarAlumnosEspecialidad, crearAlumno, crearEmpresa, borrarEmpresa, actualizarEmpresa };

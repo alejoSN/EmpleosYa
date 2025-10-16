@@ -20,6 +20,9 @@ app.get('/especialidades/:id', controlador.mostrarAlumnosEspecialidad);
 app.post('/alumnos', upload.fields([{ name: 'foto', maxCount: 1 }, { name: 'cv', maxCount: 1 }]), controlador.crearAlumno);
 app.post('/empresas', upload.none(), controlador.crearEmpresa);
 
+app.put('/empresas/:cuit', controlador.actualizarEmpresa);
+
+app.delete('/empresas/:cuit', controlador.borrarEmpresa);
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

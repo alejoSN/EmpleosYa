@@ -10,11 +10,6 @@ async function alumnoID(id) {
   return rows[0];
 }
 
-async function empresas() {
-  const [rows] = await pool.query('SELECT * FROM empresas ORDER BY LOWER(razon_social) ASC');
-  return rows;
-}
-
 async function alumnosEspecialidad(especialidad) {
   const [rows] = await pool.query('SELECT ID, nombre, apellido, foto, descripcion FROM alumnos WHERE especialidad = ?',[especialidad]);
   return rows;
@@ -25,10 +20,38 @@ async function insertarAlumno({ nombre, apellido, descripcion, foto, cv, contras
   return result.insertId; 
 }
 
+async function empresas() {
+  const [rows] = await pool.query('SELECT * FROM empresas ORDER BY LOWER(razon_social) ASC');
+  return rows;
+}
 
 async function insertarEmpresa({ cuit, razon_social, contrasena }) {
   const [result] = await pool.query(`INSERT INTO empresas (cuit, razon_social, contrasena) VALUES (?, ?, ?)`, [cuit, razon_social, contrasena]);
   return result.insertId;
 }
 
-module.exports = { alumnos, alumnoID, empresas, alumnosEspecialidad, insertarAlumno, insertarEmpresa };
+async function empresaPorCuit(cuit) {
+  const [rows] = await pool.query('SELECT * FROM empresas WHERE cuit = ?', [cuit]);
+  return rows[0] || null;
+}
+
+async function borrarEmpresa(cuit) {
+  const [result] = await pool.query('DELETE FROM empresas WHERE cuit = ?', [cuit]);
+  return result.affectedRows;
+}
+
+async function actualizarEmpresa(cuit, nuevosDatos) {
+  const updates = [];
+  const params = [];
+
+  for (const key in nuevosDatos) {
+    updates.push(`${key} = ?`);
+    params.push(nuevosDatos[key]);
+  }
+
+  params.push(cuit);
+  const [result] = await pool.query(`UPDATE empresas SET ${updates.join(', ')} WHERE cuit = ?`, params);
+  return result.affectedRows;
+}
+
+module.exports = { alumnos, alumnoID, empresas, alumnosEspecialidad, insertarAlumno, insertarEmpresa,empresaPorCuit, borrarEmpresa, actualizarEmpresa };

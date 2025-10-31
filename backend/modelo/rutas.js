@@ -1,93 +1,115 @@
-const pool = require("./conexion");
+import sql from "./conexion.js";
 
 async function alumnos() {
-  const [rows] = await pool.query("SELECT ID, nombre, apellido, foto, descripcion FROM alumnos");
-  return rows;
+  return await sql`SELECT id, nombre, apellido, foto, descripcion FROM alumnos`;
 }
 
 async function alumnoID(id) {
-  const [rows] = await pool.query(`
-    SELECT alumnos.ID, alumnos.nombre, alumnos.apellido, alumnos.foto, alumnos.cv, alumnos.descripcion, alumnos.ocupado, alumnos.especialidad, empresas.razon_social AS empresa
+  const rows = await sql`
+    SELECT alumnos.id, alumnos.nombre, alumnos.apellido, alumnos.foto,
+           alumnos.cv, alumnos.descripcion, alumnos.ocupado, alumnos.especialidad,
+           empresas.razon_social AS empresa
     FROM alumnos
     LEFT JOIN empresas ON alumnos.empresa = empresas.cuit
-    WHERE alumnos.ID = ?
-  `, [id]);
-
+    WHERE alumnos.id = ${id}
+  `;
   return rows[0];
 }
 
-
 async function alumnosEspecialidad(especialidad) {
-  const [rows] = await pool.query("SELECT ID, nombre, apellido, foto, descripcion FROM alumnos WHERE especialidad = ?",[especialidad]);
-  return rows;
+  return await sql`
+    SELECT id, nombre, apellido, foto, descripcion
+    FROM alumnos
+    WHERE especialidad = ${especialidad}
+  `;
 }
 
-async function insertarAlumno({ nombre, apellido, descripcion, foto, cv, especialidad, ocupado, empresa}) {
-  const [result] = await pool.query("INSERT INTO alumnos (nombre, apellido, descripcion, foto, cv, especialidad, ocupado, Empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [nombre, apellido, descripcion, foto, cv, especialidad, ocupado, empresa || null]);
-  return result.insertId; 
+async function insertarAlumno({ nombre, apellido, descripcion, foto, cv, especialidad, ocupado, empresa }) {
+  const rows = await sql`
+    INSERT INTO alumnos (nombre, apellido, descripcion, foto, cv, especialidad, ocupado, empresa)
+    VALUES (${nombre}, ${apellido}, ${descripcion}, ${foto}, ${cv}, ${especialidad}, ${ocupado}, ${empresa || null})
+    RETURNING id
+  `;
+  return rows[0]?.id;
 }
 
 async function borrarAlumno(id) {
-  const [result] = await pool.query("DELETE FROM alumnos WHERE ID = ?", [id]);
-  return result.affectedRows;
+  const rows = await sql`DELETE FROM alumnos WHERE id = ${id} RETURNING id`;
+  return rows.length;
 }
 
 async function actualizarAlumno(id, nuevosDatos) {
-  const updates = [];
-  const params = [];
+  const keys = Object.keys(nuevosDatos);
+  if (keys.length === 0) return 0;
 
-  for (const key in nuevosDatos) {
-    updates.push(`${key} = ?`);
-    params.push(nuevosDatos[key]);
-  }
+  const setClause = keys.map(key => `${key} = ${nuevosDatos[key]}`).join(", ");
 
-  params.push(id);
-  const [result] = await pool.query(`UPDATE alumnos SET ${updates.join(", ")} WHERE ID = ?`, params);
-  return result.affectedRows;
+  const rows = await sql`
+    UPDATE alumnos
+    SET ${sql(setClause)}
+    WHERE id = ${id}
+    RETURNING id
+  `;
+  return rows.length;
 }
 
 async function empresas() {
-  const [rows] = await pool.query("SELECT * FROM empresas ORDER BY LOWER(razon_social) ASC");
-  return rows;
+  return await sql`SELECT * FROM empresas ORDER BY LOWER(razon_social) ASC`;
 }
 
 async function insertarEmpresa({ cuit, razon_social, contrasena }) {
-  const [result] = await pool.query(`INSERT INTO empresas (cuit, razon_social, contrasena) VALUES (?, ?, ?)`, [cuit, razon_social, contrasena]);
-  return result.insertId;
+  const rows = await sql`
+    INSERT INTO empresas (cuit, razon_social, contrasena)
+    VALUES (${cuit}, ${razon_social}, ${contrasena})
+    RETURNING cuit
+  `;
+  return rows[0]?.cuit;
 }
 
 async function empresaPorCuit(cuit) {
-  const [rows] = await pool.query("SELECT * FROM empresas WHERE cuit = ?", [cuit]);
+  const rows = await sql`SELECT * FROM empresas WHERE cuit = ${cuit}`;
   return rows[0] || null;
 }
 
 async function borrarEmpresa(cuit) {
-  const [result] = await pool.query("DELETE FROM empresas WHERE cuit = ?", [cuit]);
-  return result.affectedRows;
+  const rows = await sql`DELETE FROM empresas WHERE cuit = ${cuit} RETURNING cuit`;
+  return rows.length;
 }
 
 async function actualizarEmpresa(cuit, nuevosDatos) {
-  const updates = [];
-  const params = [];
+  const keys = Object.keys(nuevosDatos);
+  if (keys.length === 0) return 0;
 
-  for (const key in nuevosDatos) {
-    updates.push(`${key} = ?`);
-    params.push(nuevosDatos[key]);
+  const setFragments = [];
+  const values = [];
+  let i = 1;
+
+  for (const key of keys) {
+    setFragments.push(`"${key}" = $${i}`);
+    values.push(nuevosDatos[key]);
+    i++;
   }
 
-  params.push(cuit);
-  const [result] = await pool.query(`UPDATE empresas SET ${updates.join(", ")} WHERE cuit = ?`, params);
-  return result.affectedRows;
+  const query = `
+    UPDATE empresas
+    SET ${setFragments.join(", ")}
+    WHERE cuit = $${i}
+    RETURNING cuit
+  `;
+  values.push(cuit);
+
+  const rows = await sql.unsafe(query, values);
+  return rows.length;
 }
 
 async function administradorPorUsuario(usuario) {
-  const [rows] = await pool.query("SELECT * FROM administradores WHERE usuario = ?", [usuario]);
+  const rows = await sql`SELECT * FROM administradores WHERE usuario = ${usuario}`;
   return rows[0] || null;
 }
 
 async function empresaPorUsuario(usuario) {
-  const [rows] = await pool.query("SELECT * FROM empresas WHERE razon_social = ?", [usuario]);
+  const rows = await sql`SELECT * FROM empresas WHERE razon_social = ${usuario}`;
   return rows[0] || null;
 }
 
-module.exports = { alumnos, alumnoID, empresas, alumnosEspecialidad, insertarAlumno, borrarAlumno, actualizarAlumno, insertarEmpresa, empresaPorCuit, borrarEmpresa, actualizarEmpresa, administradorPorUsuario, empresaPorUsuario };
+export default {alumnos, alumnoID, borrarAlumno, actualizarAlumno, insertarAlumno, alumnosEspecialidad, empresas, insertarEmpresa, borrarEmpresa, actualizarEmpresa, administradorPorUsuario, empresaPorUsuario, empresaPorCuit};

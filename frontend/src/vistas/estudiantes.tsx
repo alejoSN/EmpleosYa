@@ -4,7 +4,7 @@ import Tarjeta from "../componentes/tarjetas";
 import Header from "../componentes/header";
 
 type Alumno = {
-  ID: number;
+  id: number;
   nombre: string;
   apellido: string;
   descripcion: string;
@@ -15,13 +15,13 @@ function Estudiantes() {
   const { id } = useParams<{ id?: string }>();
   const [alumnos, setAlumnos] = useState<Alumno[]>([]);
 
-  const API_URL = import.meta.env.VITE_API_URL; // 🔹 variable de entorno
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    let url = `${API_URL}/alumnos`; // 🔹 usar variable de entorno
+    let url = `${API_URL}/alumnos`;
 
     if (id) {
-      url = `${API_URL}/especialidades/${id}`; // 🔹 usar variable de entorno
+      url = `${API_URL}/especialidades/${id}`;
     }
 
     fetch(url)
@@ -35,11 +35,11 @@ function Estudiantes() {
       <Header titulo="Alumnos" />
       <section className="listado">
         {alumnos.map((alumno) => (
-          <Link key={alumno.ID} to={`/estudiantes/${alumno.ID}`}>
+          <Link key={alumno.id} to={`/estudiantes/${alumno.id}`}>
             <Tarjeta
               nombre={`${alumno.nombre} ${alumno.apellido}`}
               descripcion={alumno.descripcion}
-              foto={alumno.foto ? `${API_URL}/archivos${alumno.foto}` : ""} // 🔹 usar variable de entorno
+              foto={alumno.foto || ""} // ✅ Usar la URL directamente de Supabase
             />
           </Link>
         ))}

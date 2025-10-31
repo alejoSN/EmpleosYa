@@ -4,7 +4,7 @@ import Header from "../componentes/header";
 import { useUsuario } from "../context/usuarioContext";
 
 type Alumno = {
-  ID: number;
+  id: number;
   nombre: string;
   apellido: string;
   descripcion: string;
@@ -19,12 +19,12 @@ function Ficha() {
   const { tipoUsuario } = useUsuario();
   const navigate = useNavigate();
 
-  const API_URL = import.meta.env.VITE_API_URL; // 🔹 variable de entorno
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (!id) return;
 
-    fetch(`${API_URL}/alumnos/${id}`) // 🔹 usar variable de entorno
+    fetch(`${API_URL}/alumnos/${id}`)
       .then((res) => res.json())
       .then((data) => setAlumno(data))
       .catch((err) => console.error("Error al cargar alumno:", err));
@@ -34,7 +34,7 @@ function Ficha() {
 
   const borrarAlumno = async () => {
     try {
-      const res = await fetch(`${API_URL}/alumnos/${alumno.ID}`, { // 🔹 usar variable de entorno
+      const res = await fetch(`${API_URL}/alumnos/${alumno.id}`, {
         method: "DELETE",
       });
       if (res.ok) {
@@ -51,7 +51,7 @@ function Ficha() {
 
   const modificarAlumno = () => {
     navigate(
-      `/crear?modo=editar&id=${alumno.ID}&nombre=${alumno.nombre}&apellido=${alumno.apellido}`
+      `/crear?modo=editar&id=${alumno.id}&nombre=${alumno.nombre}&apellido=${alumno.apellido}`
     );
   };
 
@@ -60,28 +60,15 @@ function Ficha() {
       <Header titulo={`${alumno.nombre} ${alumno.apellido}`} />
 
       <div className="ficha">
-        <img
-          src={alumno.foto ? `${API_URL}/archivos${alumno.foto}` : ""} // 🔹 usar variable de entorno
-          alt={`${alumno.nombre} ${alumno.apellido}`}
-        />
+        <img src={alumno.foto || ""} alt={`${alumno.nombre} ${alumno.apellido}`}/>
         <h2>{`${alumno.nombre} ${alumno.apellido}`}</h2>
         <p>{alumno.descripcion}</p>
-        <p>
-          <strong>Empresa:</strong> {alumno.empresa ?? "Ninguna"}
-        </p>
-        <a
-          href={alumno.cv ? `${API_URL}/archivos${alumno.cv}` : "#"} // 🔹 usar variable de entorno
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Ver CV
-        </a>
+        <p><strong>Empresa:</strong> {alumno.empresa ?? "Ninguna"}</p>
+        <a href={alumno.cv || "#"} target="_blank"> Ver CV</a>
 
         {tipoUsuario === "admin" && (
           <div className="acciones-admin">
-            <button id="borrar" onClick={borrarAlumno}>
-              Borrar
-            </button>
+            <button id="borrar" onClick={borrarAlumno}>Borrar</button>
             <button onClick={modificarAlumno}>Modificar</button>
           </div>
         )}

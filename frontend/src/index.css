@@ -1,0 +1,131 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  background-color: rgb(100, 100, 100);
+  font-family: "Montserrat", sans-serif;
+}
+
+header{
+  display: flex;
+  background-color: black;
+  color: white;
+  height: 100px;
+}
+
+header h1{
+  position: absolute;
+  align-self: center;
+  margin: 50%;
+  width: 100%;
+}
+
+header img{
+  height: 100%;
+}
+
+#login{
+  color: white;
+  background: linear-gradient(red, black);
+  height: 100vh;
+  text-align: center;
+}
+
+form div{
+  margin: 20px;
+}
+
+label{
+  font-size: 20px;
+}
+
+input{
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 20px;
+}
+
+button{
+  height: 50px;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  font-size: 24px;
+  padding: 0 20px;
+  margin: 20px;
+}
+
+#borrar{
+  background-color: red;
+}
+
+#borrar:hover{
+  background-color: rgb(180, 0, 0);
+  border-color: black
+}
+
+button:hover{
+  background-color: rgb(120, 120, 120);
+  border-color: black
+}
+
+.listado{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+  justify-content: center;
+}
+
+.tarjeta{
+  background-color: rgb(140, 160, 255);
+  width: 300px;
+  padding: 10px;
+  text-align: center;
+  border: 5px solid transparent;
+  border-radius: 20px;
+}
+
+.tarjeta:hover{
+  border-color: black;
+}
+
+.tarjeta img{
+  max-height: 200px;
+  border-radius: 50%;
+}
+
+.ficha, #admin{
+  padding: 20px;
+}
+
+.ficha img{
+  max-height: 400px;
+}
+
+.ficha a{
+  text-decoration: underline;
+  font-weight: bold;
+  color: rgb(100, 0, 0);
+}
+
+a, link{
+  color: black;
+  text-decoration: none;
+}
+
+.empresa, nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10%;
+}
+
+.empresa h3, .empresa h2{
+  width: 25%;
+}
+
+.empresa:nth-child(even), nav{
+  background-color: rgb(80, 80, 80);
+}

@@ -10,10 +10,10 @@ type Empresa = {
 function Empresas() {
     const [empresas, setEmpresas] = useState<Empresa[]>([]);
     const navigate = useNavigate();
-    const API_URL = import.meta.env.VITE_API_URL; // 🔹 variable de entorno
+    const API_URL = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
-        fetch(`${API_URL}/empresas`) // 🔹 usar variable de entorno
+        fetch(`${API_URL}/empresas`)
             .then((res) => res.json())
             .then((data) => setEmpresas(data))
             .catch((err) => console.error("Error al cargar empresas:", err));
@@ -21,7 +21,7 @@ function Empresas() {
 
     const borrarEmpresa = async (cuit: number) => {
         try {
-            const res = await fetch(`${API_URL}/empresas/${cuit}`, { // 🔹 usar variable de entorno
+            const res = await fetch(`${API_URL}/empresas/${cuit}`, { 
                 method: "DELETE",
             });
             if (!res.ok) {

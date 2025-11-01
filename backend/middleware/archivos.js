@@ -12,9 +12,11 @@ const supabase = createClient(
 
 const storage = multer.memoryStorage();
 
-const upload = multer({
+export const upload = multer({
   storage,
-
+  limits: {
+    fileSize: 10 * 1024 * 1024,
+  },
   fileFilter: (req, file, cb) => {
     if (file.fieldname === "foto") {
       const allowedTypes = /jpeg|jpg|png|gif|webp/;
@@ -89,5 +91,3 @@ export async function deleteFromSupabase(fileUrl) {
     console.error("Error al procesar URL para eliminar:", error);
   }
 }
-
-export default upload;

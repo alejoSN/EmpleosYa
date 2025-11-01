@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import upload from "./middleware/archivos.js";
-import * as controlador from "./controlador/controlador.js";
+import { upload } from "./middleware/archivos.js";
+import controlador from "./controlador/controlador.js";
 
 dotenv.config();
 

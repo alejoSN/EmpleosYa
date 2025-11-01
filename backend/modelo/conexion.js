@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const sql = postgres(process.env.DATABASE_URL, {
-  ssl: 'require',
+  ssl: { rejectUnauthorized: false }, 
 });
 
 export default sql;

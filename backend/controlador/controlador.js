@@ -93,27 +93,9 @@ async function actualizarAlumno(req, res) {
       return res.status(400).json({ error: "No hay datos para actualizar" });
     }
 
-    const setFragments = [];
-    const values = [];
-    let i = 1;
-
-    for (const key of keys) {
-      setFragments.push(`"${key}" = $${i}`);
-      values.push(datosFiltrados[key]);
-      i++;
-    }
-
-    const query = `
-      UPDATE alumnos
-      SET ${setFragments.join(", ")}
-      WHERE id = $${i}
-      RETURNING id
-    `;
-    values.push(id);
-
-    const rows = await sql.unsafe(query, values);
+    const resultado = await modelo.actualizarAlumno(id, datosFiltrados);
     
-    if (rows.length > 0) {
+    if (resultado > 0) {
       res.json({ mensaje: "Alumno actualizado correctamente" });
     } else {
       res.status(404).json({ error: "Alumno no encontrado" });
@@ -236,27 +218,9 @@ async function actualizarEmpresa(req, res) {
       return res.status(400).json({ error: "No hay datos para actualizar" });
     }
 
-    const setFragments = [];
-    const values = [];
-    let i = 1;
-
-    for (const key of keys) {
-      setFragments.push(`"${key}" = $${i}`);
-      values.push(datosFiltrados[key]);
-      i++;
-    }
-
-    const query = `
-      UPDATE empresas
-      SET ${setFragments.join(", ")}
-      WHERE cuit = $${i}
-      RETURNING cuit
-    `;
-    values.push(cuit);
-
-    const rows = await sql.unsafe(query, values);
+    const resultado = await modelo.actualizarEmpresa(cuit, datosFiltrados);
     
-    if (rows.length > 0) {
+    if (resultado > 0) {
       res.json({ mensaje: "Empresa actualizada correctamente" });
     } else {
       res.status(404).json({ error: "Empresa no encontrada" });

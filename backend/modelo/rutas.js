@@ -1,4 +1,4 @@
-import supabase from "./supabase.js";
+import supabase from "../supabase";
 
 async function alumnos() {
   const { data, error } = await supabase

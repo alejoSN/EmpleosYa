@@ -39,7 +39,7 @@ function Estudiantes() {
             <Tarjeta
               nombre={`${alumno.nombre} ${alumno.apellido}`}
               descripcion={alumno.descripcion}
-              foto={alumno.foto || ""} // ✅ Usar la URL directamente de Supabase
+              foto={alumno.foto || "https://gizyiqmkjzdqrpbjjcan.supabase.co/storage/v1/object/public/empleos-archivos/imagenes/images.jpg"} 
             />
           </Link>
         ))}

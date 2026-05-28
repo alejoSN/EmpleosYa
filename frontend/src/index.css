@@ -12,18 +12,16 @@ header{
   display: flex;
   background-color: black;
   color: white;
-  height: 100px;
+  height: 3cm;
+  align-items: center;
 }
 
 header h1{
-  position: absolute;
-  align-self: center;
-  margin: 50%;
-  width: 100%;
+  margin: 0 auto;
 }
 
 header img{
-  height: 100%;
+  width: 80%;
 }
 
 #login{
@@ -81,6 +79,7 @@ button:hover{
 .tarjeta{
   background-color: rgb(140, 160, 255);
   width: 300px;
+  min-height: 300px;
   padding: 10px;
   text-align: center;
   border: 5px solid transparent;

@@ -60,10 +60,11 @@ function Ficha() {
       <Header titulo={`${alumno.nombre} ${alumno.apellido}`} />
 
       <div className="ficha">
-        <img src={alumno.foto || ""} alt={`${alumno.nombre} ${alumno.apellido}`}/>
-        <h2>{`${alumno.nombre} ${alumno.apellido}`}</h2>
-        <p>{alumno.descripcion}</p>
-        <p><strong>Empresa:</strong> {alumno.empresa ?? "Ninguna"}</p>
+        <img src={alumno.foto || "https://gizyiqmkjzdqrpbjjcan.supabase.co/storage/v1/object/public/empleos-archivos/imagenes/images.jpg"} alt={`${alumno.nombre} ${alumno.apellido}`}/>
+        <h2>Informacion del alumno</h2>
+        <p><strong>Nombre:</strong> {`${alumno.nombre} ${alumno.apellido}`}</p>
+        <p><strong>Acerca de mi:</strong> {alumno.descripcion}</p>
+        <p><strong>Empresa actual:</strong> {alumno.empresa ?? "Ninguna"}</p>
         <a href={alumno.cv || "#"} target="_blank"> Ver CV</a>
 
         {tipoUsuario === "admin" && (

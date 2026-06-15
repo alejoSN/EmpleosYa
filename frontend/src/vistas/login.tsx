@@ -43,8 +43,9 @@ function Login() {
 
   return (
     <section id="login">
-      <img src="escudo.png" alt="logo Krause" />
-      <h1>Iniciar sesión</h1>
+      <img src="" alt="logo PPapp" />
+      <h1>PPapp</h1>
+      <p>Plataforma de Practicas Profesionalizantes</p>
       <form onSubmit={handlerFormulario}>
         <div>
           <label htmlFor="usuario">Usuario</label>
@@ -55,6 +56,7 @@ function Login() {
             name="usuario"
             value={usuario}
             onChange={(e) => setUsuario(e.target.value)}
+            placeholder="Ingrese su usuario"
           />
         </div>
         <div>
@@ -66,6 +68,7 @@ function Login() {
             name="contrasena"
             value={contrasena}
             onChange={(e) => setContrasena(e.target.value)}
+            placeholder="Ingrese su contraseña"
           />
         </div>
         <button type="submit">Entrar</button>

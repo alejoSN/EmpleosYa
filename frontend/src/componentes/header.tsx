@@ -13,7 +13,7 @@ function Header({ titulo }: TituloProps) {
   return (
     <header>
       <Link to={destino}>
-        <img src="/escudo.png" alt="Escudo de la escuela" />
+        <img src="" alt="Logo de PPapp" />
       </Link>
       <h1>{titulo}</h1>
     </header>

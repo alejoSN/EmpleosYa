@@ -46,7 +46,7 @@ function Empresas() {
                     <div className="empresa" key={empresa.cuit}>
                         <h3>{empresa.razon_social}</h3>
                         <h3>{empresa.cuit}</h3>
-                        <div>
+                        <div id="botonesEmpresas">
                             <button id="borrar" onClick={() => borrarEmpresa(empresa.cuit)}>
                                 Borrar
                             </button>

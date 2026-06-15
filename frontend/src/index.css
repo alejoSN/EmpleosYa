@@ -1,19 +1,23 @@
 body{
   margin: 0;
   padding: 0;
+  background-color: rgb(220, 255, 255);
 }
 
 :root{
-  background-color: rgb(100, 100, 100);
   font-family: "Montserrat", sans-serif;
+}
+
+h1, h2, h3, p, label{
+  color: rgb(0, 50, 50);
 }
 
 header{
   display: flex;
-  background-color: black;
-  color: white;
+  background-color: rgb(255, 255, 255);
   height: 3cm;
   align-items: center;
+  box-shadow: 0px 0px 5px rgb(80, 80, 80);
 }
 
 header h1{
@@ -25,33 +29,50 @@ header img{
 }
 
 #login{
-  color: white;
-  background: linear-gradient(red, black);
   height: 100vh;
   text-align: center;
 }
 
 form div{
   margin: 20px;
+  width: 25%;
+  margin: 0 auto;
+  text-align: left;
 }
 
 label{
   font-size: 20px;
 }
 
-input{
+input, button{
   border: 2px solid black;
   border-radius: 10px;
-  height: 20px;
+  height: 1cm;
+  width: 100%;
+  font-size: 0.5cm;
 }
 
 button{
-  height: 50px;
   border: 2px solid transparent;
-  border-radius: 25px;
-  font-size: 24px;
-  padding: 0 20px;
-  margin: 20px;
+  color: white;
+}
+
+#login button{
+  background-color: rgb(0, 120, 180);
+  width: 50%;
+  margin: 0.5cm auto;
+}
+
+#botonesEmpresas{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 20%;
+  min-width: 200px;
+}
+
+#botonesEmpresas button{
+  width: 50%;
 }
 
 #borrar{
@@ -64,7 +85,7 @@ button{
 }
 
 button:hover{
-  background-color: rgb(120, 120, 120);
+  background-color: rgb(0, 100, 150);
   border-color: black
 }
 
@@ -77,30 +98,37 @@ button:hover{
 }
 
 .tarjeta{
-  background-color: rgb(140, 160, 255);
+  background-color: rgb(255, 255, 255);
   width: 300px;
   min-height: 300px;
   padding: 10px;
   text-align: center;
-  border: 5px solid transparent;
+  border: 2px solid transparent;
   border-radius: 20px;
+  box-shadow: 0px 0px 2px rgb(80, 80, 80);
 }
 
 .tarjeta:hover{
-  border-color: black;
+  border-color: rgb(100, 200, 200);
 }
 
-.tarjeta img{
+.tarjeta img, .ficha img{
   max-height: 200px;
   border-radius: 50%;
+  box-shadow: 0px 0px 2px rgb(80, 80, 80);
 }
 
-.ficha, #admin{
+.ficha{
+  width: 50%;
+  margin: 1cm auto;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  box-shadow: 0px 0px 5px rgb(80, 80, 80);
+  padding: 1cm;
+}
+
+#admin{
   padding: 20px;
-}
-
-.ficha img{
-  max-height: 400px;
 }
 
 .ficha a{
@@ -126,5 +154,5 @@ a, link{
 }
 
 .empresa:nth-child(even), nav{
-  background-color: rgb(80, 80, 80);
+  background-color: rgb(180, 220, 255);
 }

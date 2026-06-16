@@ -68,7 +68,7 @@ function Ficha() {
         <a href={alumno.cv || "#"} target="_blank"> Ver CV</a>
 
         {tipoUsuario === "admin" && (
-          <div className="acciones-admin">
+          <div>
             <button id="borrar" onClick={borrarAlumno}>Borrar</button>
             <button onClick={modificarAlumno}>Modificar</button>
           </div>

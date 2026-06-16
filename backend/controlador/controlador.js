@@ -109,7 +109,7 @@ async function actualizarAlumno(req, res) {
 async function mostrarAlumnosEspecialidad(req, res) {
   try {
     const { id } = req.params;
-    const alumnos = await modelo.alumnosEspecialidad(id);
+    const alumnos = await modelo.alumnos(id);
     res.json(alumnos);
   } catch (error) {
     console.error(error);

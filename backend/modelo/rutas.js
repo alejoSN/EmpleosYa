@@ -1,10 +1,16 @@
 import supabase from "../supabase.js";
 
-async function alumnos() {
-  const { data, error } = await supabase
+async function alumnos(especialidad = null) {
+  let query = supabase
     .from('alumnos')
     .select('id, nombre, apellido, foto, descripcion');
-  
+
+  if (especialidad) {
+    query = query.eq('especialidad', especialidad);
+  }
+
+  const { data, error } = await query;
+
   if (error) throw error;
   return data;
 }
@@ -26,16 +32,6 @@ async function alumnoID(id) {
     delete data.empresas;
   }
   
-  return data;
-}
-
-async function alumnosEspecialidad(especialidad) {
-  const { data, error } = await supabase
-    .from('alumnos')
-    .select('id, nombre, apellido, foto, descripcion')
-    .eq('especialidad', especialidad);
-  
-  if (error) throw error;
   return data;
 }
 
@@ -173,7 +169,6 @@ export default {
   borrarAlumno,
   actualizarAlumno,
   insertarAlumno,
-  alumnosEspecialidad,
   empresas,
   insertarEmpresa,
   borrarEmpresa,

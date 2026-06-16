@@ -11,6 +11,7 @@ type Alumno = {
   empresa: string | null;
   cv: string;
   foto: string;
+  ocupado: number;
 };
 
 function Ficha() {
@@ -64,8 +65,9 @@ function Ficha() {
         <h2>Informacion del alumno</h2>
         <p><strong>Nombre:</strong> {`${alumno.nombre} ${alumno.apellido}`}</p>
         <p><strong>Acerca de mi:</strong> {alumno.descripcion}</p>
-        <p><strong>Empresa actual:</strong> {alumno.empresa ?? "Ninguna"}</p>
         <a href={alumno.cv || "#"} target="_blank"> Ver CV</a>
+        <p><strong>Estado:</strong> {alumno.ocupado ? "Ocupado" : "Disponible"}</p>
+        <p><strong>Empresa actual:</strong> {alumno.empresa ?? "Ninguna"}</p>
 
         {tipoUsuario === "admin" && (
           <div>

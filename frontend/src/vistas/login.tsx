@@ -43,7 +43,7 @@ function Login() {
 
   return (
     <section id="login">
-      <img src="" alt="logo PPapp" />
+      <img src="PPapp.ico" alt="logo PPapp" />
       <h1>PPapp</h1>
       <p>Plataforma de Practicas Profesionalizantes</p>
       <form onSubmit={handlerFormulario}>

@@ -225,6 +225,7 @@ function Crear() {
 
               <div>
                 <label htmlFor="descripcion">Descripcion: </label>
+                <br />
                 <textarea
                   id="descripcion"
                   name="descripcion"

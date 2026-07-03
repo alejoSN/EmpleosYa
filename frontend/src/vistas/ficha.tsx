@@ -58,7 +58,7 @@ function Ficha() {
 
   return (
     <>
-      <Header titulo={`${alumno.nombre} ${alumno.apellido}`} />
+      <Header titulo={alumno.nombre + " " + alumno.apellido} />
 
       <div className="ficha">
         <img src={alumno.foto || "https://gizyiqmkjzdqrpbjjcan.supabase.co/storage/v1/object/public/empleos-archivos/imagenes/images.jpg"} alt={`${alumno.nombre} ${alumno.apellido}`}/>

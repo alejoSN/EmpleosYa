@@ -29,6 +29,10 @@ header img{
   margin: 0 10px;
 }
 
+#login img{
+  height: 5cm;
+}
+
 #login{
   text-align: center;
   padding: 1cm;
